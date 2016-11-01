@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tile Index Browser</title>
+        <style>
+            html,
+            body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                position: relative;
+                margin: 0;
+            }
+
+            canvas {
+                position: absolute;
+                width: 0;
+                height: 0;
+                top: 0;
+                left: 0;
+                transform-origin: 0% 0%;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <canvas id="canvas"></canvas>
+
+        <script>
+            var imageToRender = "../../samples/sample-texture.png";
+            var tileSize = 32;
+
+            var canvas,
+                ctx;
+
+            function resize(x, y) {
+                canvas.style.width = x + "px";
+                canvas.style.height = y + "px";
+                canvas.width = x;
+                canvas.height = y;
+                ctx.width = x;
+                ctx.height = y;
+            }
+
+            function fitInWindow() {
+                var xScale = window.innerWidth / canvas.width;
+                var yScale = window.innerHeight / canvas.height;
+                var scale = Math.min(xScale, yScale);
+                canvas.style.transform = "scale(" + scale + ")";
+            }
+
+            function main() {
+                canvas = document.getElementById('canvas');
+                ctx = canvas.getContext('2d');
+
+                bindEvents();
+
+                loadImage(imageToRender, function(img) {
+                    resize(img.width, img.height);
+                    fitInWindow();
+                    draw(img);
+                });
+            }
+
+            function bindEvents() {
+                window.addEventListener("resize", fitInWindow, false);
+            }
+
+            function draw(img) {
+                ctx.drawImage(img, 0, 0);
+                ctx.beginPath();
+                ctx.font = "12px Arial";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#db0000";
+                for (var y = 0; y <= img.height; y += tileSize) {
+                    ctx.moveTo(y, 0);
+                    ctx.lineTo(y, img.height);
+                    for (var x = 0; x <= img.width; x += tileSize) {
+                        ctx.moveTo(0, x);
+                        ctx.lineTo(img.width, x);
+                        var ix = x / tileSize;
+                        var iy = y / tileSize;
+                        ctx.fillText((iy * tileSize + ix), x + (tileSize / 2), y + (tileSize / 2));
+                    }
+                }
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            function loadImage(url, cb) {
+                var img = new Image();
+                img.onload = function() {
+                    cb(img);
+                };
+                img.src = url;
+            }
+
+            main();
+        </script>
+
+    </body>
+
+</html>
