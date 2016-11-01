@@ -155,7 +155,6 @@
 		"one-var": 0,
 		"operator-assignment": 0,
 		"padded-blocks": 0,
-		"quotes": [2, "single", "avoid-escape"],
 		"semi": 2,
 		"semi-spacing": [2, {"before": false, "after": true}],
 		"sort-vars": 0,
