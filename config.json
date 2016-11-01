@@ -1,0 +1,26 @@
+{
+    "directory": "/Users/mduve/Desktop/",
+    "source": "./samples/source-minimal.png",
+    "mapIndices": {
+        "R0G0B0A255": {
+            "mapToIndex": [299, 302],
+            "description": "water"
+        },
+        "R255G0B0A255": {
+            "mapToIndex": [101, 164, 165, 166],
+            "description": "mountain"
+        },
+        "R0G255B0A255": {
+            "mapToIndex": [293, 296],
+            "description": "desert"
+        },
+        "R0G0B255A255": {
+            "mapToIndex": [113, 176, 177, 178],
+            "description": "lava"
+        },
+        "R255G255B0A255": {
+            "mapToIndex": [290, 161, 162, 163, 98],
+            "description": "grass"
+        }
+    }
+}
