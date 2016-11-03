@@ -1,12 +1,12 @@
 {
-  "name": "data2textures",
+  "name": "AutoTilingTexturer",
   "version": "0.0.1",
   "author": "Michael Duve",
   "email": "mduve@designmail.net",
-  "description": "A lightweight node js implementation to map an existing sprite of single tile textures to a large region",
+  "description": "A lightweight node js implementation of an auto tiling algorithm",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dazlious/data2textures.git"
+    "url": "https://github.com/dazlious/AutoTilingTexturer.git"
   },
   "keywords": [
     "textures",
