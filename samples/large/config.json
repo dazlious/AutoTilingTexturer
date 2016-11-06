@@ -1,6 +1,6 @@
 {
-    "directory": "/Users/mduve/Desktop/",
-    "source": "./samples/source-minimal.png",
+    "destination": "./output/textures/large/",
+    "image": "./samples/large/source.png",
     "mapIndices": {
         "R0G0B0A255": {
             "mapToIndex": [299, 302],

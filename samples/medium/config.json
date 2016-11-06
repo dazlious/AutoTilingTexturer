@@ -1,0 +1,31 @@
+{
+    "destination": "./output/textures/medium/",
+    "image": "./samples/medium/source.png",
+    "chunksize": 2,
+    "mapIndices": {
+        "R0G0B0A255": {
+            "mapToIndex": [111]
+        },
+        "R255G0B0A255": {
+            "mapToIndex": [211]
+        },
+        "R0G255B0A255": {
+            "mapToIndex": [121]
+        },
+        "R0G0B255A255": {
+            "mapToIndex": [112]
+        },
+        "R255G255B0A255": {
+            "mapToIndex": [221]
+        },
+        "R255G0B255A255": {
+            "mapToIndex": [212]
+        },
+        "R0G255B255A255": {
+            "mapToIndex": [122]
+        },
+        "R255G255B255A255": {
+            "mapToIndex": [222]
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
   "name": "AutoTilingTexturer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Michael Duve",
   "email": "mduve@designmail.net",
   "description": "A lightweight node js implementation of an auto tiling algorithm",

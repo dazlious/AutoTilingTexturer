@@ -5,7 +5,11 @@ let getPixels = require("get-pixels")
 class FileHandler {
 
     constructor(cwd = process.cwd()) {
-        this.cwd = cwd;
+        if (!FileHandler.instance) {
+            this.cwd = cwd;
+            FileHandler.instance = this;
+        }
+        return FileHandler.instance;
     }
 
     readFile(path) {
@@ -14,7 +18,11 @@ class FileHandler {
 
     saveToFile(data, name, extension) {
         const exportPath = path.resolve(this.cwd, `${name}.${extension}`);
-        return fs.outputFileSync(exportPath, JSON.stringify(data));
+        return fs.outputFile(exportPath, data, (err) => {
+            if (err) {
+                console.error(err.msg);
+            }
+        });
     }
 
     readImage(path, cb) {
@@ -27,5 +35,7 @@ class FileHandler {
     }
 
 }
+
+FileHandler.instance = null;
 
 module.exports = FileHandler;

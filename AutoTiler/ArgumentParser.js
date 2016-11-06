@@ -1,8 +1,6 @@
 const Argv = require('yargs');
 const Fs = require("fs-extra");
 
-const Color = require("./color.js");
-
 class ArgumentParser {
 
     constructor() {
@@ -11,24 +9,29 @@ class ArgumentParser {
 
     initArgumentOptions() {
         this.args = Argv
-        .option('d', {
-            alias: 'directory',
+        .config('config', (configPath) => {
+            let t = JSON.parse(Fs.readFileSync(configPath, 'utf-8'));
+            return t;
+        })
+        .option('destination', {
             nargs: 1,
             description: 'current working directory',
             required: true,
             type: 'string',
             normalize: true
         })
-        .option('s', {
-            alias: 'source',
+        .option('chunksize', {
+            nargs: 1,
+            description: 'size of chunks',
+            default: 128,
+            type: 'number'
+        })
+        .option('image', {
             nargs: 1,
             description: 'source image',
             required: true,
             type: 'string',
             normalize: true
-        })
-        .config('settings', (configPath) => {
-            return JSON.parse(Fs.readFileSync(configPath, 'utf-8'));
         })
         .epilog('Copyright 2016 by dazlious')
         .argv;
