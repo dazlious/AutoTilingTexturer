@@ -2,10 +2,11 @@
 <html lang="de">
 
     <head>
+        <title>Tile Index Browser</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tile Index Browser</title>
+        <link rel="stylesheet" href="bootstrap.min.css">
         <style>
             html,
             body {
@@ -31,19 +32,43 @@
             * {
                 box-sizing: border-box;
             }
+
+            .options {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+            }
+
+            .content {
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                height: calc(100% - 50px);
+            }
         </style>
     </head>
 
     <body>
 
-        <canvas id="canvas"></canvas>
+        <div class="options">
+            <input id="file" type="file" accept="image/*" />
+            <input id="tileSize" type="number" min="0" value="32" />
+        </div>
+        <div id="content" class="content">
+            <canvas id="canvas"></canvas>
+        </div>
 
         <script>
             var imageToRender = "../../samples/sample-texture.png";
-            var tileSize = 32;
+            var tileSize;
 
             var canvas,
-                ctx;
+                ctx,
+                content,
+                texture;
 
             function resize(x, y) {
                 canvas.style.width = x + "px";
@@ -55,8 +80,8 @@
             }
 
             function fitInWindow() {
-                var xScale = window.innerWidth / canvas.width;
-                var yScale = window.innerHeight / canvas.height;
+                var xScale = content.clientWidth / canvas.width;
+                var yScale = content.clientHeight / canvas.height;
                 var scale = Math.min(xScale, yScale);
                 canvas.style.transform = "scale(" + scale + ")";
             }
@@ -64,18 +89,31 @@
             function main() {
                 canvas = document.getElementById('canvas');
                 ctx = canvas.getContext('2d');
+                content = document.getElementById('content');
 
                 bindEvents();
-
-                loadImage(imageToRender, function(img) {
-                    resize(img.width, img.height);
-                    fitInWindow();
-                    draw(img);
-                });
             }
 
             function bindEvents() {
                 window.addEventListener("resize", fitInWindow, false);
+
+                document.getElementById("file").addEventListener("change", function(e) {
+                    imageToRender = URL.createObjectURL(e.target.files[0]);
+                    loadImage(imageToRender, function(img) {
+                        texture = img
+                        tileSize = parseInt(document.getElementById("tileSize").value, 10);
+                        resize(texture.width, texture.height);
+                        fitInWindow();
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        draw(texture);
+                    });
+                }, false);
+
+                document.getElementById("tileSize").addEventListener("input", function(e) {
+                    tileSize = parseInt(this.value, 10);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    draw(texture);
+                }, false);
             }
 
             function draw(img) {
