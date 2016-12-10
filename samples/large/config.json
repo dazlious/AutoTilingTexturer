@@ -7,20 +7,20 @@
             "description": "water"
         },
         "R255G0B0A255": {
-            "mapToIndex": [101, 164, 165, 166],
+            "mapToIndex": [310],
             "description": "mountain"
         },
-        "R0G255B0A255": {
-            "mapToIndex": [293, 296],
+        "R255G255B0A255": {
+            "mapToIndex": [167, 168, 169, 104],
             "description": "desert"
         },
         "R0G0B255A255": {
-            "mapToIndex": [113, 176, 177, 178],
-            "description": "lava"
+            "mapToIndex": [161, 162, 163, 353, 354, 355],
+            "description": "highland grass"
         },
-        "R255G255B0A255": {
-            "mapToIndex": [290, 161, 162, 163, 98],
-            "description": "grass"
+        "R0G255B0A255": {
+            "mapToIndex": [170, 171, 172],
+            "description": "tundra"
         }
     }
 }
